@@ -7,8 +7,7 @@ import { clerkPlugin } from "@clerk/vue";
 import App from "./App.vue";
 import router from "./router";
 
-//Must put key in .env file
-const PUBLISHABLE_KEY = pk_test_cnVsaW5nLWtpd2ktOS5jbGVyay5hY2NvdW50cy5kZXYk;
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 const app = createApp(App);
 
 if (!PUBLISHABLE_KEY) {
