@@ -41,6 +41,26 @@
                 </div>
               </div>
             </div>
+            <!-- Actions Button -->
+            <button
+              class="ml-4 p-2 rounded-full text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+              @click="mobileButtonRef = !mobileButtonRef">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
+            </button>
+            <div v-if="mobileButtonRef"
+              class="absolute mt-42 bottom right-5 mt w-48 bg-white rounded-md shadow-lg z-10">
+              <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                <a v-for="items in dynamicRoutes" :key="items.name" :href="items.href"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">{{ items.name }}</a>
+                <button type="button" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  @click="mobileButtonRef = false">
+                  Close Menu
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -347,6 +367,9 @@ import { useUser, UserButton, SignInButton } from '@clerk/vue';
 const { isLoaded, user } = useUser();
 const isLoading = computed(() => !isLoaded);
 
+//button ref
+const mobileButtonRef = ref(false)
+
 // User details
 const userName = computed(() => user.value?.fullName || '');
 const userEmail = computed(() => user.value?.primaryEmailAddress?.emailAddress || '');
@@ -377,6 +400,14 @@ const appointments = ref([
     time: '2:30 PM'
   }
 ]);
+
+//Dynamic routes
+const dynamicRoutes = [
+  { name: 'e-pharmacy', href: "#" },
+  { name: 'services', href: "#" },
+  { name: 'mobile clinic', href: '#' },
+  { name: 'Xtra Care', href: "#" },
+]
 
 onMounted(() => {
   console.log('Dashboard loaded');

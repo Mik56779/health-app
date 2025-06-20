@@ -15,7 +15,13 @@ const router = createRouter({
     {
       path: "/dashboard",
       name: "home",
-      component: Home,
+      children: [
+        { path: "", component: Home },
+        // {path: "phamacy", component: home},
+        // {path: 'service', component: home},
+        // {path: 'mobile', component: home},
+        // {path:'xcare', component: home},
+      ],
     },
     {
       path: "/about",
